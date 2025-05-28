@@ -21,3 +21,5 @@ jwt:
 logging:
   level:
     org.springframework.web: DEBUG
+server:
+  port: 8084
