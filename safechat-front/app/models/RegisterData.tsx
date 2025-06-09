@@ -1,5 +1,5 @@
 
-export interface RegisterData {
+export  interface RegisterData {
   nombre: string;
   apellido: string;
   email: string;
@@ -7,3 +7,4 @@ export interface RegisterData {
   telefono: string;
   fechaNacimiento: Date;
 }
+export default RegisterData;

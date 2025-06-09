@@ -1,78 +1,48 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import { BottomNavigation, Text, useTheme } from 'react-native-paper';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import BottomNav from '../utils/BottomNav';
 
-const HomeRoute = () => {
-  const { colors } = useTheme();
-  return (
-    <View style={[styles.scene, { backgroundColor: colors.background }]}>
-      <Text style={{ color: colors.onSurface, fontSize: 22, fontWeight: 'bold', marginBottom: 10 }}>
-        Bienvenido a SafeChat!
-      </Text>
-      <Text style={{ color: colors.onSurface }}>
-        Aquí podrás gestionar tus mensajes seguros y analizar correos con tranquilidad.
-      </Text>
-    </View>
-  );
-};
-
-const ProfileRoute = () => {
-  const { colors } = useTheme();
-  return (
-    <View style={[styles.scene, { backgroundColor: colors.background }]}>
-      <Image
-        source={require('../../assets/images/logo.png')}
-        style={{ width: 120, height: 120, marginBottom: 20 }}
-      />
-      <Text style={{ color: colors.onSurface, fontSize: 18 }}>
-        Perfil de usuario
-      </Text>
-    </View>
-  );
-};
+// Asegúrate de tener este logo en tus assets
+const logo = require('../../assets/images/logo.png'); // Ruta ajustable según tu estructura
 
 export default function Dashboard() {
   const { colors } = useTheme();
-  const router = useRouter();
-
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'home', title: 'Inicio', icon: 'home' },
-    { key: 'profile', title: 'Perfil', icon: 'account' },
-    { key: 'logout', title: 'Salir', icon: 'logout' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    home: HomeRoute,
-    profile: ProfileRoute,
-    logout: () => {
-      // Logout logic: borrar token y redirigir a login
-      AsyncStorage.removeItem('token').then(() => {
-        router.replace('/login');
-      });
-      return null;
-    },
-  });
 
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={(i) => setIndex(i)}
-      renderScene={renderScene}
-      barStyle={{ backgroundColor: colors.primary }}
-      activeColor={colors.onPrimary}
-      inactiveColor={colors.onSurface}
-    />
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      {/* Top Banner */}
+      <View style={[styles.banner, { backgroundColor: colors.surface }]}>
+        <Text style={[styles.title, { color: colors.onSurface }]}>SafeChat</Text>
+        <Image source={logo} style={styles.logo} resizeMode="contain" />
+      </View>
+
+      {/* Navegación inferior */}
+      <View style={{ flex: 1 }}>
+        <BottomNav />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-    justifyContent: 'center',
+  banner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 40,
+    paddingBottom: 10,
+    elevation: 4,
+    zIndex: 10,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    borderRadius: 12,
   },
 });
