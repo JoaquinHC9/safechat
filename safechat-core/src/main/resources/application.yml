@@ -23,3 +23,5 @@ logging:
     org.springframework.web: DEBUG
 server:
   port: 8084
+fastapi:
+  base-url: http://localhost:8000
