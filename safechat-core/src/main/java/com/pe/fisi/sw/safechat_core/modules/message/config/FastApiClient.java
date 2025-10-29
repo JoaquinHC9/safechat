@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @Service
@@ -50,7 +51,7 @@ public class FastApiClient {
             PredictDTO dto = new PredictDTO();
             dto.setModelo("BERT_LSTM");
             dto.setPrediccion(prediccion);
-            dto.setConfianza(1.0f); // si luego agregas probabilidades, cámbialo
+            dto.setConfianza(BigDecimal.valueOf(1.0f)); // si luego agregas probabilidades, cámbialo
 
             return dto;
 

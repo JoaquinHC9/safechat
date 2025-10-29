@@ -1,5 +1,6 @@
 package com.pe.fisi.sw.safechat_core.security.controller;
 
+import com.pe.fisi.sw.safechat_core.security.dto.ForgotPasswordRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.LoginRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.RegisterRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.TokenResponse;
@@ -25,4 +26,10 @@ public class AuthController {
     public ResponseEntity<TokenResponse> login(@RequestBody @Valid LoginRequest userRequest) {
         return new ResponseEntity<>(usuarioService.login(userRequest), HttpStatus.OK);
     }
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestBody @Valid ForgotPasswordRequest request) {
+        usuarioService.actualizarPassword(request);
+        return ResponseEntity.ok("La contraseña ha sido actualizada correctamente.");
+    }
+
 }

@@ -26,7 +26,7 @@ public class Mensaje {
     @Column(name = "tipo_mensaje", length = 50)
     private String tipoMensaje = "SMS";
 
-    @Column(name = "origen", length = 100)
+    @Column(name = "fuente", length = 100)
     private String fuente;
 
     @Column(name = "estado", length = 50)

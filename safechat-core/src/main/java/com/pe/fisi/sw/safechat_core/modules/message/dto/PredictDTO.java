@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class PredictDTO {
     private String modelo;
     private String prediccion;
-    private Float confianza;
+    private BigDecimal confianza;
 }

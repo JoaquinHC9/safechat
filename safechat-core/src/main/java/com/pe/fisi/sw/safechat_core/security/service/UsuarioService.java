@@ -1,16 +1,18 @@
 package com.pe.fisi.sw.safechat_core.security.service;
 
+import com.pe.fisi.sw.safechat_core.security.dto.ForgotPasswordRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.LoginRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.RegisterRequest;
 import com.pe.fisi.sw.safechat_core.security.dto.TokenResponse;
-import com.pe.fisi.sw.safechat_core.security.exception.InvalidCredentialsException;
-import com.pe.fisi.sw.safechat_core.security.exception.UsuarioRegistradoExcepcion;
+
+import com.pe.fisi.sw.safechat_core.security.exception.CustomException;
 import com.pe.fisi.sw.safechat_core.security.jwt.JwtProvider;
 import com.pe.fisi.sw.safechat_core.security.model.Rol;
 import com.pe.fisi.sw.safechat_core.security.model.Usuario;
 import com.pe.fisi.sw.safechat_core.security.repository.UsuarioRepository;
 import com.pe.fisi.sw.safechat_core.security.utils.RolEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,7 +37,7 @@ public class UsuarioService {
         }
         boolean existe = usuarioRepository.findByEmail(request.getEmail()).isPresent();
         if (existe) {
-            throw new UsuarioRegistradoExcepcion("El email solicitado ya existe!");
+            throw new CustomException("El email solicitado ya existe!", HttpStatus.CONFLICT);
         }
         Rol rolUsario = new Rol();
         rolUsario.setRolEnum(RolEnum.ROL_USUARIO);
@@ -67,8 +69,16 @@ public class UsuarioService {
     public Authentication authenticate(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
-            throw new InvalidCredentialsException("La contraseña es incorrecta");
+            throw new CustomException("La contraseña es incorrecta",HttpStatus.BAD_REQUEST);
         }
         return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
+    }
+
+    public void actualizarPassword(ForgotPasswordRequest request) {
+        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new CustomException("El usuario no existe", HttpStatus.NOT_FOUND));
+
+        usuario.setPassword(passwordEncoder.encode(request.getNuevaPassword()));
+        usuarioRepository.save(usuario);
     }
 }

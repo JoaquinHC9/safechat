@@ -1,5 +1,3 @@
-# noinspection SqlNoDataSourceInspectionForFile
-
 CREATE TABLE rol
 (
     id_rol SERIAL PRIMARY KEY,

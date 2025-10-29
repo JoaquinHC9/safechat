@@ -2,6 +2,7 @@ package com.pe.fisi.sw.safechat_core.modules.message.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,10 +23,10 @@ public class ModeloIA {
     private String version;
 
     @Column(name = "precision", precision = 5, scale = 2)
-    private Double precision;
+    private BigDecimal precision;
 
     @Column(name = "f1_score", precision = 5, scale = 2)
-    private Double f1Score;
+    private BigDecimal f1Score;
 
     @Column(name = "creado_en", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime creadoEn;

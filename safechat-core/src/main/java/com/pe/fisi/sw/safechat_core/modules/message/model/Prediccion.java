@@ -3,6 +3,7 @@ package com.pe.fisi.sw.safechat_core.modules.message.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +28,7 @@ public class Prediccion {
     private String etiquetaPrediccion;
 
     @Column(name = "confianza", precision = 5, scale = 2)
-    private Float confianza;
+    private BigDecimal confianza;
 
     @Column(name = "analizado_en", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime analizadoEn;
