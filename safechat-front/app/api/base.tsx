@@ -1,9 +1,8 @@
 // src/api/base.ts
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
-const BASE_URL = 'https://ws-tracklog.com/java';
-
+import Constants from "expo-constants";
+const BASE_URL = Constants.expoConfig?.extra?.apiUrl;
 const instance = axios.create({
   baseURL: BASE_URL,
   timeout: 30000,

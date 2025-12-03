@@ -4,10 +4,14 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
+    "dev": "set APP_ENV=development && expo start",
+    "prod": "set APP_ENV=production && expo start",    
+    "android": "set APP_ENV=development && expo run:android",
+    "ios": "set APP_ENV=development && expo run:ios",
+    "web": "set APP_ENV=development && expo start --web",    
+    "build:android": "set APP_ENV=production && eas build -p android --profile production",
+    "build:ios": "set APP_ENV=production && eas build -p ios --profile production",    
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -20,6 +24,7 @@
     "@react-navigation/native-stack": "^7.3.10",
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.3",
     "expo": "~53.0.9",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.6",
