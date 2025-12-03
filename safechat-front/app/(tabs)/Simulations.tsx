@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, Dialog, Portal, ProgressBar, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SimulationResult, SimulationScenario, simulationsService, UserProgress } from '../services/simulationsService';
+import { SimulationResult, SimulationScenario, simulationsService, UserProgress } from '../../src/services/simulationsService';
 
 export const Simulations = () => {
   const { colors } = useTheme();

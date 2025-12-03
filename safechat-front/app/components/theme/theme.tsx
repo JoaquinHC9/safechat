@@ -54,3 +54,5 @@ export const customTheme: MD3Theme = {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <PaperProvider theme={customTheme}>{children}</PaperProvider>;
 };
+
+export default ThemeProvider;

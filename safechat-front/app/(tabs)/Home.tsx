@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { blocklistService, BlocklistStats } from '../services/blocklistService';
-import { SecurityTip, tipsService } from '../services/tipsService';
+import { blocklistService, BlocklistStats } from '../../src/services/blocklistService';
+import { SecurityTip, tipsService } from '../../src/services/tipsService';
 
 export const HomeRoute = () => {
   const { colors } = useTheme();

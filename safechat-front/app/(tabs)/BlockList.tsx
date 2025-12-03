@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, FAB, IconButton, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { BlockedContact, blocklistService, BlocklistStats } from '../services/blocklistService';
+import { BlockedContact, blocklistService, BlocklistStats } from '../../src/services/blocklistService';
 
 export const Blocklist = () => {
   const { colors } = useTheme();

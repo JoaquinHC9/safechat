@@ -1,19 +1,19 @@
 import * as dotenv from "dotenv";
-import "dotenv/config";
 
 export default ({ config }) => {
   const env = process.env.APP_ENV || "development";
 
-  // Cargar el archivo .env correspondiente
-  dotenv.config({
-    path: `.env.${env}`,
-  });
+  try {
+    dotenv.config({ path: `.env.${env}` });
+  } catch (e) {
+    console.log(`No se pudo cargar .env.${env}`, e);
+  }
 
   return {
     ...config,
     extra: {
       apiUrl: process.env.API_URL,
-      env
-    }
+      env,
+    },
   };
 };

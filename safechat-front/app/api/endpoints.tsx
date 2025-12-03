@@ -1,6 +1,6 @@
 // src/api/endpoints.ts
-import { LoginData } from '../models/LoginData';
-import { RegisterData } from '../models/RegisterData';
+import { LoginData } from '../../src/models/LoginData';
+import { RegisterData } from '../../src/models/RegisterData';
 import instance from './base';
 
 
@@ -14,3 +14,5 @@ export const safeChatApi = {
     return instance.post('auth/register', user);
   }
 };
+
+export default safeChatApi;

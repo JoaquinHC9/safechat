@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Avatar, Button, Card, Chip, Dialog, Divider, List, Portal, ProgressBar, Switch, Text, TextInput, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Achievement, ActivityLog, profileService, ProfileStats, SecuritySettings, UserProfile } from '../services/profileService';
+import { Achievement, ActivityLog, profileService, ProfileStats, SecuritySettings, UserProfile } from '../../src/services/profileService';
 
 export const Profile = () => {
   const { colors } = useTheme();

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { AnalysisResult, analyzeService } from '../services/analyzeService';
+import { AnalysisResult, analyzeService } from '../../src/services/analyzeService';
 
 export const Analyze = () => {
   const { colors } = useTheme();

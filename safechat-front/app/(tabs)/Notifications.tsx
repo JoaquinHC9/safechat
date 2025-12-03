@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, Dialog, Divider, FAB, IconButton, Menu, Portal, SegmentedButtons, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Notification, notificationsService, NotificationStats } from '../services/notificationsService';
+import { Notification, notificationsService, NotificationStats } from '../../src/services/notificationsService';
 
 type FilterType = 'all' | 'unread' | 'critical' | 'threats';
 

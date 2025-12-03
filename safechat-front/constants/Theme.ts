@@ -13,3 +13,5 @@ export const customTheme = {
   },
   fonts: configureFonts({ config: {} }),
 };
+
+export default customTheme;

@@ -3,8 +3,8 @@ import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Snackbar, Text, TextInput, useTheme } from 'react-native-paper';
+import { LoginData } from '../../src/models/LoginData';
 import { safeChatApi } from '../api/endpoints';
-import { LoginData } from '../models/LoginData';
 
 export default function LoginScreen() {
   const { colors } = useTheme();
