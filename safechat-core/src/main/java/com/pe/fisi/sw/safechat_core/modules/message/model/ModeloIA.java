@@ -14,7 +14,7 @@ public class ModeloIA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_modelo")
-    private Long idModelo;
+    private Integer idModelo;
 
     @Column(name = "nombre_modelo", nullable = false, length = 100)
     private String nombreModelo;
@@ -22,7 +22,7 @@ public class ModeloIA {
     @Column(name = "version", length = 50)
     private String version;
 
-    @Column(name = "precision", precision = 5, scale = 2)
+    @Column(name = "precision_score", precision = 5, scale = 2)
     private BigDecimal precision;
 
     @Column(name = "f1_score", precision = 5, scale = 2)

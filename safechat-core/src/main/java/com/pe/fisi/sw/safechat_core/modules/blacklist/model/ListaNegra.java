@@ -15,7 +15,7 @@ public class ListaNegra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idListaNegra;
+    private Integer idListaNegra;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)

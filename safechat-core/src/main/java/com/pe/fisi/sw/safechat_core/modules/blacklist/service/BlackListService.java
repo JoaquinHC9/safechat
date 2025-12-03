@@ -20,7 +20,7 @@ public class BlackListService {
     private final UsuarioRepository usuarioRepo;
 
 
-    public ListaNegra agregarABlacklist(Long idUsuario, String valor, String tipo, String motivo) {
+    public ListaNegra agregarABlacklist(Integer idUsuario, String valor, String tipo, String motivo) {
         Usuario usuario = usuarioRepo.findById(idUsuario)
                 .orElseThrow(() -> new CustomException("Usuario no encontrado",HttpStatus.NOT_FOUND));
 

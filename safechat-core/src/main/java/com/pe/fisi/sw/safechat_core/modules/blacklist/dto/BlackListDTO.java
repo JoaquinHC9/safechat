@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlackListDTO {
-    private Long idUsuario;
+    private Integer idUsuario;
     private String valor;  // email o número
     private String tipo;   // "correo" o "telefono"
     private String motivo;

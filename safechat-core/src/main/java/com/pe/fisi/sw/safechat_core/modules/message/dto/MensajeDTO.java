@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MensajeDTO {
-    private Long userId;
+    private Integer userId;
     private String tipo;
     private String contenido;
     private String fuente;

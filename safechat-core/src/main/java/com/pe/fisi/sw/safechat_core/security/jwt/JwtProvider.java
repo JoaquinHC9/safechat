@@ -31,7 +31,7 @@ public class JwtProvider {
     public TokenResponse generateToken(String email) {
         Map<String, Object> claims = new HashMap<>();
 
-        Long userId = usuarioRepository.findUsuarioByEmail(email).getIdUsuario();
+        Integer userId = usuarioRepository.findUsuarioByEmail(email).getIdUsuario();
         claims.put("userId", userId);
 
         String token = Jwts.builder()

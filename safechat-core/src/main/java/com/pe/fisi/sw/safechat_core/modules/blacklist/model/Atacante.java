@@ -14,7 +14,7 @@ public class Atacante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAtacante;
+    private Integer idAtacante;
 
     @Column(nullable = false, unique = true)
     private String valor; // correo, teléfono o dominio
