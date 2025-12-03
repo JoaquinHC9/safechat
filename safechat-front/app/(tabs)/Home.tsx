@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Chip, Text, useTheme } from 'react-native-paper';
@@ -12,15 +13,34 @@ export const HomeRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
+  const [userId, setUserId] = useState<string | null>(null);
+
+  // Obtener userId desde AsyncStorage al iniciar
   useEffect(() => {
-    loadData();
+    const fetchUserId = async () => {
+      try {
+        const id = await AsyncStorage.getItem('userId'); // clave usada al login
+        if (id) setUserId(id);
+        else console.warn('No se encontró userId en AsyncStorage');
+      } catch (e) {
+        console.error('Error obteniendo userId', e);
+      }
+    };
+    fetchUserId();
   }, []);
 
+  // Cargar datos cuando se tenga el userId
+  useEffect(() => {
+    if (userId) loadData();
+  }, [userId]);
+
   const loadData = async () => {
+    if (!userId) return;
+    setIsLoading(true);
     try {
       const [tip, statistics] = await Promise.all([
         tipsService.getDailyTip(),
-        blocklistService.getStats(),
+        blocklistService.getStats(Number(userId)),
       ]);
       setDailyTip(tip);
       setStats(statistics);
@@ -55,7 +75,7 @@ export const HomeRoute = () => {
     }
   };
 
-  if (isLoading) {
+  if (!userId || isLoading) {
     return (
       <View style={[styles.loadingContainer, { backgroundColor: colors.background }]}>
         <ActivityIndicator size="large" color={colors.primary} />
@@ -153,11 +173,11 @@ export const HomeRoute = () => {
                 {getCategoryLabel(dailyTip.category).toUpperCase()}
               </Chip>
             </View>
-            
+
             <Text variant="titleMedium" style={[styles.tipMainTitle, { color: colors.onSurface }]}>
               {dailyTip.title}
             </Text>
-            
+
             <Text variant="bodyMedium" style={[styles.tipDescription, { color: colors.onSurfaceVariant }]}>
               {dailyTip.description}
             </Text>
@@ -182,7 +202,7 @@ export const HomeRoute = () => {
             <Button
               mode="contained"
               icon="shield-search"
-              onPress={() => {}}
+              onPress={() => { }}
               style={styles.actionButton}
               contentStyle={styles.actionButtonContent}
             >
@@ -191,7 +211,7 @@ export const HomeRoute = () => {
             <Button
               mode="contained-tonal"
               icon="account-cancel"
-              onPress={() => {}}
+              onPress={() => { }}
               style={styles.actionButton}
               contentStyle={styles.actionButtonContent}
             >
@@ -202,7 +222,7 @@ export const HomeRoute = () => {
             <Button
               mode="contained-tonal"
               icon="school"
-              onPress={() => {}}
+              onPress={() => { }}
               style={styles.actionButton}
               contentStyle={styles.actionButtonContent}
             >
@@ -211,7 +231,7 @@ export const HomeRoute = () => {
             <Button
               mode="contained-tonal"
               icon="bell-alert"
-              onPress={() => {}}
+              onPress={() => { }}
               style={styles.actionButton}
               contentStyle={styles.actionButtonContent}
             >
@@ -230,7 +250,7 @@ export const HomeRoute = () => {
               Mantente Seguro
             </Text>
           </View>
-          
+
           <View style={styles.tipsList}>
             <View style={styles.tipsItem}>
               <Icon name="check-circle" size={18} color="#4CAF50" />

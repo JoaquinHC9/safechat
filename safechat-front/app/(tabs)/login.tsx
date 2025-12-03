@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link, useRouter } from 'expo-router';
+import { jwtDecode } from 'jwt-decode';
 import React, { useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Snackbar, Text, TextInput, useTheme } from 'react-native-paper';
@@ -15,30 +16,34 @@ export default function LoginScreen() {
   const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const handleLogin = async () => {
-    const credentials: LoginData = {
-      email: email,
-      password,
-    };
+  const credentials: LoginData = { email, password };
 
-    try {
-      const response = await safeChatApi.login(credentials);
+  try {
+    const response = await safeChatApi.login(credentials);
 
-      if (response.status === 200 && response.data.token) {
-        await AsyncStorage.setItem('token', response.data.token);
-        setSnackbarMessage('Inicio de sesión exitoso');
-        setSnackbarVisible(true);
-        // Aquí puedes navegar al dashboard, por ejemplo
-        router.push('/dashboard');
-      } else {
-        setSnackbarMessage('Credenciales inválidas o error en el servidor');
-        setSnackbarVisible(true);
+    if (response.status === 200 && response.data.token) {
+      const token = response.data.token;
+      await AsyncStorage.setItem('token', token);
+
+      // Decodificar token para extraer userId
+      const decoded: any = jwtDecode(token); // o crear interfaz con userId
+      if (decoded.userId) {
+        await AsyncStorage.setItem('userId', decoded.userId.toString());
       }
-    } catch (error) {
-      console.error(error);
-      setSnackbarMessage('Ocurrió un error inesperado'+  error);
+
+      setSnackbarMessage('Inicio de sesión exitoso');
+      setSnackbarVisible(true);
+      router.push('/dashboard');
+    } else {
+      setSnackbarMessage('Credenciales inválidas o error en el servidor');
       setSnackbarVisible(true);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setSnackbarMessage('Ocurrió un error inesperado' + error);
+    setSnackbarVisible(true);
+  }
+};
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
