@@ -3,9 +3,9 @@ spring:
     name: safechat-core
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/safechat
+    url: jdbc:postgresql://localhost:5433/phishingApp
     username: postgres
-    password: postgres
+    password: admin
     driver-class-name: org.postgresql.Driver
 
   jpa:

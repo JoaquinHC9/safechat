@@ -12,5 +12,5 @@ export const safeChatApi = {
   },
   register: function (user: RegisterData) {
     return instance.post('auth/register', user);
-  },
+  }
 };

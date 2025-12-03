@@ -21,11 +21,9 @@ public class BlackListService {
 
 
     public ListaNegra agregarABlacklist(Long idUsuario, String valor, String tipo, String motivo) {
-        // Verificar existencia del usuario
         Usuario usuario = usuarioRepo.findById(idUsuario)
                 .orElseThrow(() -> new CustomException("Usuario no encontrado",HttpStatus.NOT_FOUND));
 
-        // Verificar si el atacante ya existe
         Atacante atacante = atacanteRepo.findByValor(valor)
                 .orElseGet(() -> {
                     Atacante nuevo = new Atacante();
@@ -34,13 +32,11 @@ public class BlackListService {
                     return atacanteRepo.save(nuevo);
                 });
 
-        // Evitar duplicados en lista negra
         boolean existe = listaNegraRepo.existsByUsuarioIdUsuarioAndAtacanteIdAtacante(usuario.getIdUsuario(), atacante.getIdAtacante());
         if (existe) {
             throw new CustomException("El atacante ya está en la lista negra de este usuario", HttpStatus.CONFLICT);
         }
 
-        // Crear relación lista negra
         ListaNegra entrada = new ListaNegra();
         entrada.setUsuario(usuario);
         entrada.setAtacante(atacante);
