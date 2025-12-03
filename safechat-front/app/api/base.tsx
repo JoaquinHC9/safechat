@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8084/v1/';
+const BASE_URL = 'https://ws-tracklog.com/java';
 
 const instance = axios.create({
   baseURL: BASE_URL,

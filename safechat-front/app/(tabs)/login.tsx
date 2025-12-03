@@ -16,7 +16,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     const credentials: LoginData = {
-      email,
+      username: email,
       password,
     };
 
