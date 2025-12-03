@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import Constants from "expo-constants";
 const BASE_URL = Constants.expoConfig?.extra?.apiUrl;
+console.log("API URL:", BASE_URL);
 const instance = axios.create({
   baseURL: BASE_URL,
   timeout: 30000,
